@@ -9,7 +9,7 @@ public class SocioTorcedor extends Pessoa {
 
     public SocioTorcedor(String nome, String cpf, LocalDate dataNascimento, Plano plano) {
         super(nome, cpf, dataNascimento);
-        this.plano = plano;
+        this.plano = plano;  
     }
 
     @Override
