@@ -43,6 +43,6 @@ public abstract class Pessoa {
     public abstract String tipoTorcedor();
     public abstract Double Desconto();
     public abstract void exibirDados();
-    public abstract void setPlano();
+    public abstract void setPlano(Plano novoPlano);
     public abstract Plano getPlano();
 }

@@ -1,113 +1,111 @@
 package aplicacao;
-import java.time.LocalDate;
+
+import entidades.Pessoa;
+import entidades.Plano;
+import entidades.SocioTorcedor;
+import entidades.TorcedorInadimplente;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import entidades.Pessoa;
-
-//classe para guardar e manusear dados de todas as pessoas, incluindo os com plano e os sem
-
+/**
+ * Classe responsável por gerenciar a lista de torcedores em memória.
+ * Implementa as regras de negócio para Inserção, Alteração, Exclusão, Busca e Ordenação.
+ */
 public class Gerenciamento {
-    
-    private ArrayList<Pessoa> pessoas; 
+
+    // Estrutura de dados para armazenar os torcedores (Requisito 10)
+    private ArrayList<Pessoa> listaTorcedores;
 
     public Gerenciamento() {
-        pessoas = new ArrayList<>();
+        this.listaTorcedores = new ArrayList<>();
     }
 
-    // Método para cadastrar pessoa
-    public void cadastrar(Pessoa pessoa) {
-        pessoas.add(pessoa);
-        System.out.println("Torcedor cadastrado com sucesso!");
+    // 1. CADASTRAR (Requisito 3)
+    public void adicionarTorcedor(Pessoa torcedor) {
+        if (buscarPorCpf(torcedor.getCpf()) == null) {
+            listaTorcedores.add(torcedor);
+            System.out.println("Torcedor cadastrado com sucesso!");
+        } else {
+            System.out.println("Erro: Já existe um torcedor cadastrado com este CPF.");
+        }
     }
 
-     // Método para buscar por CPF
+    // 2. BUSCAR POR CPF (Requisito 5)
     public Pessoa buscarPorCpf(String cpf) {
-        for (Pessoa pessoa : pessoas) {
-            if (pessoa.getCpf().equals(cpf)) {
-                return pessoa;
+        for (Pessoa t : listaTorcedores) {
+            if (t.getCpf().equals(cpf)) {
+                return t;
             }
         }
-
-        return null;
+        return null; // Retorna null se não encontrar
     }
 
-    // Método para alterar dados buscando pelo CPF
-    public void alterarPorCpf(String cpf, String novoNome, LocalDate novaDataNascimento) {
+    // 3. REMOVER (Requisito 3)
+    public boolean removerTorcedor(String cpf) {
+        Pessoa torcedor = buscarPorCpf(cpf);
+        if (torcedor != null) {
+            listaTorcedores.remove(torcedor);
+            return true;
+        }
+        return false;
+    }
+
+    // 4. LISTAR EM FORMATO TABULAR (Requisito 4)
+    public void listarTodos() {
+        if (listaTorcedores.isEmpty()) {
+            System.out.println("Nenhum torcedor cadastrado no sistema.");
+            return;
+        }
+
+        System.out.println("\n=======================================================================================================");
+        System.out.printf("%-15s | %-14s | %-12s | %-22s | %-25s\n", "NOME", "CPF", "NASCIMENTO", "TIPO TORCEDOR", "DETALHES / DESCONTO");
+        System.out.println("=======================================================================================================");
         
-        Pessoa pessoaEncontrada = buscarPorCpf(cpf);
-        
-        if (pessoaEncontrada != null) {
-            pessoaEncontrada.setNome(novoNome);
-            pessoaEncontrada.setDataNascimento(novaDataNascimento);
-            pessoaEncontrada.setPlano(novoPlano);
+        for (Pessoa t : listaTorcedores) {
+            // Imprime usando o formato tabular definido nas subclasses
+            System.out.printf("%-15s | %-14s | %-12s | %-22s | ", 
+                t.getNome(), t.getCpf(), t.getDataNascimento(), t.tipoTorcedor());
             
-            System.out.println("Torcedor alterado com sucesso!");
-        } else {
-            System.out.println("Torcedor não encontrado.");
+            if (t instanceof SocioTorcedor) {
+                System.out.printf("Desconto: %.0f%%\n", t.Desconto() * 100);
+            } else {
+                System.out.printf("Desconto: %.0f%%\n", t.Desconto() * 100);
+            }
         }
+        System.out.println("=======================================================================================================\n");
     }
 
-    // Método para remover buscando pelo CPF
-    public void removerPorCpf(String cpf) {
-
-        Pessoa pessoaEncontrada = buscarPorCpf(cpf);
-
-        if (pessoaEncontrada != null) {
-            pessoas.remove(pessoaEncontrada);
-            System.out.println("Torcedor removido com sucesso!");
-        } else {
-            System.out.println("Torcedor não encontrado.");
-        }
-    }
-
-   
-    // Método para listar em formato tabular
-    public void listarTabela() {
-        if (pessoas.isEmpty()) {
-            System.out.println("Nenhum torcedor cadastrado.");
-            return;
-        }
-
-        System.out.println("====================================================================================");
-        System.out.printf("%-25s %-18s %-18s %-20s %-10s%n",
-                "Nome", "CPF", "Nascimento", "Tipo", "Desconto");
-        System.out.println("====================================================================================");
-
-        for (Pessoa pessoa : pessoas) {
-            System.out.printf("%-25s %-18s %-18s %-20s %-10.2f%n",
-                    pessoa.getNome(),
-                    pessoa.getCpf(),
-                    pessoa.getDataNascimento(),
-                    pessoa.tipoTorcedor(),
-                    pessoa.calcularDesconto());
-        }
-
-        System.out.println("====================================================================================");
-    }
-
-    // Método para listar ordenado por nome
+    // 5. LISTAR DE FORMA ORDENADA POR NOME (Requisito 6)
     public void listarOrdenadoPorNome() {
-        if (pessoas.isEmpty()) {
-            System.out.println("Nenhum torcedor cadastrado.");
+        if (listaTorcedores.isEmpty()) {
+            System.out.println("Nenhuma pessoa cadastrada para ordenar.");
             return;
         }
 
-        Collections.sort(pessoas, new Comparator<Pessoa>() {
+        // Criando uma cópia temporária da lista para não desordenar a principal
+        ArrayList<Pessoa> listaOrdenada = new ArrayList<>(listaTorcedores);
+        
+        // Ordenação usando Comparator baseado no Nome de forma alfabética
+        Collections.sort(listaOrdenada, new Comparator<Pessoa>() {
             @Override
             public int compare(Pessoa p1, Pessoa p2) {
                 return p1.getNome().compareToIgnoreCase(p2.getNome());
             }
         });
 
-        listarTabela();
+        System.out.println("\n--- LISTA ORDENADA POR NOME (ALFABÉTICA) ---");
+        System.out.printf("%-15s | %-14s | %-22s\n", "NOME", "CPF", "TIPO TORCEDOR");
+        System.out.println("----------------------------------------------------------------------");
+        for (Pessoa t : listaOrdenada) {
+            System.out.printf("%-15s | %-14s | %-22s\n", t.getNome(), t.getCpf(), t.tipoTorcedor());
+        }
+        System.out.println("----------------------------------------------------------------------\n");
     }
 
-    // Método extra para mostrar quantidade
-    public int quantidadeTorcedores() {
-        return pessoas.size();
+    // Getter para expor a lista caso o Programa.java precise contar os elementos
+    public ArrayList<Pessoa> getListaTorcedores() {
+        return listaTorcedores;
     }
 }
-
-

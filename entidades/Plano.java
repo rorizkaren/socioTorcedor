@@ -1,4 +1,5 @@
 package entidades;
+
 // classe para os planos
 public class Plano {            // atributos especificos da classe Plano
     private int id;
@@ -13,8 +14,8 @@ public class Plano {            // atributos especificos da classe Plano
         this.id = id;
         this.nomePlano = nomePlano;
         this.valorMensalidade = valorMensalidade;
-        this.beneficios = beneficios;
-        this.desconto = desconto;
+        this.desconto = desconto;      // AJUSTADO: Alinhado com a ordem dos parâmetros
+        this.beneficios = beneficios;  // AJUSTADO: Alinhado com a ordem dos parâmetros
     }
 
      // métodos da classe, getters e setters 
@@ -27,7 +28,6 @@ public class Plano {            // atributos especificos da classe Plano
         this.id = id;
     }
 
-
     public String getNomePlano() {
         return nomePlano;
     }
@@ -35,7 +35,6 @@ public class Plano {            // atributos especificos da classe Plano
     public void setNomePlano(String nomePlano) {
         this.nomePlano = nomePlano;
     }
-
 
     public Double getValorMensalidade() {
         return valorMensalidade;
@@ -67,5 +66,4 @@ public class Plano {            // atributos especificos da classe Plano
         return "Plano [id=" + id + ", nomePlano=" + nomePlano + ", valorMensalidade=" + valorMensalidade
                 + ", beneficios=" + beneficios + "]";
     } 
-
 }
