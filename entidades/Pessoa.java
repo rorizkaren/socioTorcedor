@@ -35,17 +35,12 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
-    // Método abstrato (obrigatório implementar nas subclasses)
-    public abstract void exibirDados();
-
     @Override
     public String toString() {
         return "Nome: " + nome + ", CPF: " + cpf + ", Data de Nascimento: " + dataNascimento;
     }
 
-
-    // métodos que todos os torcedores (classes filhas) com seus respectivos planos são obrigados a ter
-    public abstract Double calcularDesconto();
     public abstract String tipoTorcedor();
-
+    public abstract Double Desconto();
+    public abstract void exibirDados();
 }
