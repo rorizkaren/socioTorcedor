@@ -41,6 +41,8 @@ public class Gerenciamento {
         if (pessoaEncontrada != null) {
             pessoaEncontrada.setNome(novoNome);
             pessoaEncontrada.setDataNascimento(novaDataNascimento);
+            pessoaEncontrada.setPlano(novoPlano);
+            
             System.out.println("Torcedor alterado com sucesso!");
         } else {
             System.out.println("Torcedor não encontrado.");

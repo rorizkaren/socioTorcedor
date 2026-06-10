@@ -22,11 +22,13 @@ public class SocioTorcedor extends Pessoa {
         return plano.getDesconto();
     }
 
+    @Override
     public Plano getPlano(){
         return plano;
     }
 
     // metodo para alterar o plano
+    @Override
     public void setPlano(Plano novoPlano) {
         this.plano = novoPlano;
     }

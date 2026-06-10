@@ -29,7 +29,7 @@ public class TorcedorInadimplante extends Pessoa {
 
     @Override 
     public Double Desconto(){
-        return plano.getDesconto();
+        return plano.getDesconto();mmbmkbkbkkbkbkkkkkkkkkkkkkkkkkk
     }
 
 
