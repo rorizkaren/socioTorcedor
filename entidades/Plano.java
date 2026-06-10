@@ -4,13 +4,17 @@ public class Plano {            // atributos especificos da classe Plano
     private int id;
     private String nomePlano;
     private Double valorMensalidade;
+    private Double desconto;
     private String beneficios;
     
-    public Plano(int id, String nomePlano, Double valorMensalidade, String beneficios) {
+    public Plano(int id, String nomePlano, Double valorMensalidade, Double desconto, 
+        String beneficios) {
+
         this.id = id;
         this.nomePlano = nomePlano;
         this.valorMensalidade = valorMensalidade;
         this.beneficios = beneficios;
+        this.desconto = desconto;
     }
 
      // métodos da classe, getters e setters 
@@ -41,7 +45,14 @@ public class Plano {            // atributos especificos da classe Plano
         this.valorMensalidade = valorMensalidade;
     }
 
+    public Double getDesconto() {
+        return desconto;
+    }
 
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+    
     public String getBeneficios() {
         return beneficios;
     }
@@ -55,6 +66,6 @@ public class Plano {            // atributos especificos da classe Plano
     public String toString() {
         return "Plano [id=" + id + ", nomePlano=" + nomePlano + ", valorMensalidade=" + valorMensalidade
                 + ", beneficios=" + beneficios + "]";
-    }
+    } 
 
 }
