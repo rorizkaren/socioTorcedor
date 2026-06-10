@@ -24,7 +24,7 @@ public class SocioTorcedor extends Pessoa {
 
     @Override
     public Plano getPlano(){
-        return plano;
+        return plano; 
     }
 
     // metodo para alterar o plano
