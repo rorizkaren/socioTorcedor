@@ -1,9 +1,8 @@
 package entidades;
 
-/**
- * Interface que define o contrato para qualquer classe que precise de autenticação no sistema.
- * Atende ao requisito obrigatório de Interface do projeto.
- */
+
+ //Interface que define o contrato para qualquer classe que precise de autenticação no sistema.
+ 
 public interface Autenticavel {
     
     /**

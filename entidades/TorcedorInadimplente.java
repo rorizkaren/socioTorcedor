@@ -1,29 +1,27 @@
 package entidades;
-
 import java.time.LocalDate;
 
-// Representa o torcedor cadastrado mas que está inadimplente ou sem plano ativo
+// Representa o torcedor cadastrado mas que está sem plano
 public class TorcedorInadimplente extends Pessoa {
 
     // Atributos específicos da classe
     private Plano plano;
     private String motivoRestricao; // Guarda a razão da inadimplência/inatividade
 
-    // CONSTRUTOR CORRIGIDO: Agora recebe o motivo enviado pelo Programa.java
+    
     public TorcedorInadimplente(String nome, String cpf, LocalDate dataNascimento, String motivoRestricao) {
         super(nome, cpf, dataNascimento);
         this.motivoRestricao = motivoRestricao;
-        // Instancia um plano padrão zerado (Free) para não dar NullPointerException
         this.plano = new Plano(0, "Comum (Free)", 0.0, 0.0, "Sem benefícios de sócio torcedor");
     }
 
-    // Retorna o plano padrão criado no construtor
+    // Retorna o plano free
     @Override
     public Plano getPlano() {
         return plano;
     }
 
-    // Método obrigatório da classe mãe para alterar o plano se ele voltar a pagar
+    // Metodo para alterrar plano
     @Override
     public void setPlano(Plano novoPlano) {
         this.plano = novoPlano;
@@ -48,12 +46,9 @@ public class TorcedorInadimplente extends Pessoa {
         this.motivoRestricao = motivoRestricao;
     }
 
-    /**
-     * Método para exibir os dados de forma detalhada e organizada no terminal.
-     */
     @Override
     public void exibirDados() {
-        System.out.println(toString()); // Exibe os dados básicos de Pessoa
+        System.out.println(toString()); 
         System.out.println("Tipo:          " + tipoTorcedor());
         System.out.println("Situação:      " + motivoRestricao);
         System.out.println("Plano Atual:   " + plano.getNomePlano());
