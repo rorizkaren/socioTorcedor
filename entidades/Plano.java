@@ -14,8 +14,8 @@ public class Plano {            // atributos especificos da classe Plano
         this.id = id;
         this.nomePlano = nomePlano;
         this.valorMensalidade = valorMensalidade;
-        this.desconto = desconto;      // AJUSTADO: Alinhado com a ordem dos parâmetros
-        this.beneficios = beneficios;  // AJUSTADO: Alinhado com a ordem dos parâmetros
+        this.desconto = desconto;      
+        this.beneficios = beneficios;  
     }
 
      // métodos da classe, getters e setters 
