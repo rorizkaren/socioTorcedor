@@ -2,26 +2,29 @@ package entidades;
 import java.time.LocalDate;
 
 // Representa o torcedor cadastrado mas que está sem plano
+// Requisito de herança da classe abstrata pessoa
 public class TorcedorInadimplente extends Pessoa {
 
     // Atributos específicos da classe
     private Plano plano;
     private String motivoRestricao; // Guarda a razão da inadimplência/inatividade
 
-    
     public TorcedorInadimplente(String nome, String cpf, LocalDate dataNascimento, String motivoRestricao) {
         super(nome, cpf, dataNascimento);
         this.motivoRestricao = motivoRestricao;
+        // Instanciação automática de um plano sem custos
         this.plano = new Plano(0, "Comum (Free)", 0.0, 0.0, "Sem benefícios de sócio torcedor");
     }
-
-    // Retorna o plano free
+    
+    // REQUISITO: POLIMORFISMO DE SOBRESCRITA (@Override)
+    // As anotações @Override provam que esta classe está assinando os métodos abstratos
+    // da classe mãe Pessoa, mas dando a eles uma implementação específica para o inadimplente.
     @Override
     public Plano getPlano() {
         return plano;
     }
 
-    // Metodo para alterrar plano
+    // Metodo para alterar plano
     @Override
     public void setPlano(Plano novoPlano) {
         this.plano = novoPlano;

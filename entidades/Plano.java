@@ -1,24 +1,21 @@
 package entidades;
 
 // classe para os planos
-public class Plano {            // atributos especificos da classe Plano
+public class Plano {
+
     private int id;
     private String nomePlano;
     private Double valorMensalidade;
     private Double desconto;
     private String beneficios;
     
-    public Plano(int id, String nomePlano, Double valorMensalidade, Double desconto, 
-        String beneficios) {
-
+    public Plano(int id, String nomePlano, Double valorMensalidade, Double desconto, String beneficios) {
         this.id = id;
         this.nomePlano = nomePlano;
         this.valorMensalidade = valorMensalidade;
         this.desconto = desconto;      
         this.beneficios = beneficios;  
     }
-
-     // métodos da classe, getters e setters 
 
     public int getId() {
         return id;
@@ -60,10 +57,8 @@ public class Plano {            // atributos especificos da classe Plano
         this.beneficios = beneficios;
     }
 
-     // exibição dos dados do plano
     @Override
     public String toString() {
-        return "Plano [id=" + id + ", nomePlano=" + nomePlano + ", valorMensalidade=" + valorMensalidade
-                + ", beneficios=" + beneficios + "]";
-    } 
+        return nomePlano + " - R$ " + valorMensalidade;
+    }
 }

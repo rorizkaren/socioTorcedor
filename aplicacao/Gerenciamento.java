@@ -1,29 +1,28 @@
 package aplicacao;
 
 import entidades.Pessoa;
-import entidades.Plano;
 import entidades.SocioTorcedor;
-import entidades.TorcedorInadimplente;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-
 public class Gerenciamento {
 
-    // classe para manuesear dados do usuario
+    // classe para manusear dados do usuario
     private ArrayList<Pessoa> listaTorcedores;
 
     public Gerenciamento() {
         this.listaTorcedores = new ArrayList<>();
     }
 
-    //  metodo para cadastro 
-    public void adicionarTorcedor(Pessoa torcedor) {
+    // método para cadastro (Mantive a versão com retorno boolean, que é mais completa)
+    public boolean adicionarTorcedor(Pessoa torcedor) {
         if (buscarPorCpf(torcedor.getCpf()) == null) {
             listaTorcedores.add(torcedor);
+            return true;
         } else {
-            System.out.println("Erro: Já existe um torcedor cadastrado com este CPF.");
+            System.out.println("Erro: Já existe um torcedor cadastrado com este CPF, tente novamente.");
+            return false;
         }
     }
 
@@ -37,7 +36,7 @@ public class Gerenciamento {
         return null; 
     }
 
-    //  metodo para remover torcedor 
+    // método para remover torcedor 
     public boolean removerTorcedor(String cpf) {
         Pessoa torcedor = buscarPorCpf(cpf);
         if (torcedor != null) {
@@ -68,7 +67,6 @@ public class Gerenciamento {
                 System.out.printf("Desconto: %.0f%%\n", t.Desconto() * 100);
             }
         }
-      
     }
 
     // listar de forma ordenada 
@@ -97,7 +95,7 @@ public class Gerenciamento {
         }
     }
 
-    // Getter para expor a lista para a interface contar ops elemwntos 
+    // Getter para expor a lista para a interface contar os elementos 
     public ArrayList<Pessoa> getListaTorcedores() {
         return listaTorcedores;
     }

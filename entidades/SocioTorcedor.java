@@ -2,7 +2,7 @@ package entidades;
 
 import java.time.LocalDate;
 
-// classe para os trocedores com plano
+// classe para os torcedores com plano, uso de implements para aplicar a interface
 public class SocioTorcedor extends Pessoa implements Autenticavel { //implemntando a interface 
 
     // Atributos específicos
