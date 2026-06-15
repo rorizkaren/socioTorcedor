@@ -5,7 +5,6 @@ package entidades;
  * Atende ao requisito obrigatório de Interface do projeto.
  */
 public interface Autenticavel {
-    
     /**
      * Método abstrato que obriga as classes que a implementam a fornecer uma lógica de validação de senha.
      * @param senha A senha digitada pelo usuário para validação.
