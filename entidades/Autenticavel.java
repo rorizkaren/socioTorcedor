@@ -1,8 +1,9 @@
 package entidades;
 
-
- //Interface que define o contrato para qualquer classe que precise de autenticação no sistema.
- 
+/**
+ * Interface que define o contrato para qualquer classe que precise de autenticação no sistema.
+ * Atende ao requisito obrigatório de Interface do projeto.
+ */
 public interface Autenticavel {
     /**
      * Método abstrato que obriga as classes que a implementam a fornecer uma lógica de validação de senha.

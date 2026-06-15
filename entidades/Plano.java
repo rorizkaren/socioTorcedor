@@ -13,8 +13,8 @@ public class Plano {
         this.id = id;
         this.nomePlano = nomePlano;
         this.valorMensalidade = valorMensalidade;
-        this.desconto = desconto;      
-        this.beneficios = beneficios;  
+        this.desconto = desconto;      // AJUSTADO: Alinhado com a ordem dos parâmetros
+        this.beneficios = beneficios;  // AJUSTADO: Alinhado com a ordem dos parâmetros
     }
 
     public int getId() {
