@@ -18,15 +18,17 @@ public class Gerenciamento {
         this.listaTorcedores = new ArrayList<>();
     }
 
-    //  metodo para cadastro 
-    public void adicionarTorcedor(Pessoa torcedor) {
-        if (buscarPorCpf(torcedor.getCpf()) == null) {
-            listaTorcedores.add(torcedor);
-        } else {
-            System.out.println("Erro: Já existe um torcedor cadastrado com este CPF.");
-        }
+    // metodo para cadastro 
+    public boolean adicionarTorcedor(Pessoa torcedor) {
+    if (buscarPorCpf(torcedor.getCpf()) == null) {
+        listaTorcedores.add(torcedor);
+        return true;
+    } else {
+        System.out.println("Erro: Já existe um torcedor cadastrado com este CPF.");
+        return false;
     }
-
+}
+    
     // buscar torcedor por cpf
     public Pessoa buscarPorCpf(String cpf) {
         for (Pessoa t : listaTorcedores) {

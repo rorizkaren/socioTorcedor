@@ -79,45 +79,64 @@ public class Programa {
 
             switch (opcao) {
                 case 1: // INCLUIR 
-                    System.out.println("\nINCLUIR NOVO TORCEDOR \n");
-                    System.out.print("Nome: ");
-                    String nome = teclado.nextLine();
-                    System.out.print("CPF: ");
-                    String cpf = teclado.nextLine();
-                    System.out.print("Data de Nascimento (dd/mm/aaaa): ");
-                    String dataStr = teclado.nextLine();
-                    LocalDate dataNasc = LocalDate.parse(dataStr, formatadorData);
+                System.out.println("\nINCLUIR NOVO TORCEDOR \n");
 
-                    System.out.println("Selecione a situação:");
-                    System.out.println("1 - Sócio Torcedor Ativo");
-                    System.out.println("2 - Torcedor Inadimplente / Inativo");
-                    System.out.print("Opção: ");
-                    int tipo = Integer.parseInt(teclado.nextLine());
+                System.out.print("Nome: ");
+                String nome = teclado.nextLine();
 
-                    if (tipo == 1) {
-                        System.out.println("Escolha um Plano:");
-                        for (Plano p : plano) {
-                            System.out.println(p.getId() + " - " + p.getNomePlano() + " (R$ " + p.getValorMensalidade() + ")");
-                        }
-                        System.out.print("ID do Plano: ");
-                        int idPlano = Integer.parseInt(teclado.nextLine());
-                        Plano planoEscolhido = plano.get(idPlano - 1);
+                System.out.print("CPF: ");
+                String cpf = teclado.nextLine();
 
-                        System.out.print("Crie uma Senha de Acesso: ");
-                        String senha = teclado.nextLine();
+                System.out.print("Data de Nascimento (dd/mm/aaaa): ");
+                String dataStr = teclado.nextLine();
+                LocalDate dataNasc = LocalDate.parse(dataStr, formatadorData);
 
-                        gerenciador.adicionarTorcedor(new SocioTorcedor(nome, cpf, dataNasc, planoEscolhido, senha));
-                        System.out.println("Torcedor cadastrado com sucesso!");
-                        System.out.println("");
+                System.out.println("Selecione a situação:");
+                System.out.println("1 - Sócio Torcedor Ativo");
+                System.out.println("2 - Torcedor Inadimplente / Inativo");
+                System.out.print("Opção: ");
+                int tipo = Integer.parseInt(teclado.nextLine());
 
-                    } else {
-                        System.out.print("Motivo da Restrição/Inatividade: ");
-                        String motivo = teclado.nextLine();
-                        gerenciador.adicionarTorcedor(new TorcedorInadimplente(nome, cpf, dataNasc, motivo));
-                        System.out.println("Torcedor cadastrado com sucesso!");
-                        System.out.println("");
+                if (tipo == 1) {
+                    System.out.println("Escolha um Plano:");
+
+                    for (Plano p : plano) {
+                        System.out.println(p.getId() + " - " + p.getNomePlano() + " (R$ " + p.getValorMensalidade() + ")");
                     }
-                    break;
+
+                    System.out.print("ID do Plano: ");
+                    int idPlano = Integer.parseInt(teclado.nextLine());
+                    Plano planoEscolhido = plano.get(idPlano - 1);
+
+                    System.out.print("Crie uma Senha de Acesso: ");
+                    String senha = teclado.nextLine();
+
+                    boolean cadastrado = gerenciador.adicionarTorcedor(
+                        new SocioTorcedor(nome, cpf, dataNasc, planoEscolhido, senha)
+                    );
+
+                    if (cadastrado) {
+                        System.out.println("Torcedor cadastrado com sucesso!");
+                    }
+
+                    System.out.println("");
+
+                } else {
+                    System.out.print("Motivo da Restrição/Inatividade: ");
+                    String motivo = teclado.nextLine();
+
+                    boolean cadastrado = gerenciador.adicionarTorcedor(
+                        new TorcedorInadimplente(nome, cpf, dataNasc, motivo)
+                    );
+
+                    if (cadastrado) {
+                        System.out.println("Torcedor cadastrado com sucesso!");
+                    }
+
+                    System.out.println("");
+                }
+
+                break;
 
                 case 2: // ALTERAR 
                     System.out.println("\n ALTERAR DADOS DO TORCEDOR\n");
