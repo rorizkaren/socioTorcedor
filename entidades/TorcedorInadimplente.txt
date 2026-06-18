@@ -1,6 +1,6 @@
 package entidades;
 import java.time.LocalDate;
-
+//
 // Representa o torcedor cadastrado mas que está sem plano
 public class TorcedorInadimplente extends Pessoa {
 
